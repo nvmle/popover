@@ -1,23 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import Page from "./components/page";
+
+const initNotices = [
+  "Уведомление 1",
+  "Уведомление 2",
+  "Уведомление 3",
+  "Уведомление 4",
+  "Уведомление 5",
+];
 
 function App() {
+  const [notices, setNotices] = useState(initNotices);
+
+  const handleAddNotice = (noticeText) => {
+    console.log("noticeText", noticeText);
+
+    setNotices((prevState) => [...prevState, noticeText]);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Page onAddNotice={handleAddNotice} notices={notices} />
     </div>
   );
 }
