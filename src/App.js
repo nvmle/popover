@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Page from "./components/page";
 
 const initNotices = [
@@ -12,8 +12,27 @@ const initNotices = [
 function App() {
   const [notices, setNotices] = useState(initNotices);
 
-  const handleAddNotice = (noticeText) => {
-    setNotices((prevState) => [...prevState, noticeText]);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      handleAddNotice(`Уведомление ${notices.length + 1}`);
+    }, 5000);
+    return () => clearInterval(interval);
+  });
+
+  const setNoticeDate = () => {
+    const date = Date.now();
+    return date;
+  };
+
+  const handleAddNotice = (notice) => {
+    const newNotice = {
+      id: notices.length + 1,
+      noticeText: notice,
+      read: false,
+      date: setNoticeDate(),
+    };
+
+    setNotices((prevState) => [...prevState, newNotice]);
   };
 
   const handleDeleteNotices = () => {

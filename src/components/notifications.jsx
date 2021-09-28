@@ -1,8 +1,4 @@
 import React from "react";
-// import { Popover } from "bootstrap";
-// import { createPopper } from "@popperjs/core";
-// import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-
 import { Popover, OverlayTrigger, Button } from "react-bootstrap";
 
 const Notifications = ({ notices, countOfNotices }) => {
@@ -22,12 +18,12 @@ const Notifications = ({ notices, countOfNotices }) => {
   };
   const renderNotice = (note) => {
     return (
-      <>
+      <div key={note.id}>
         <h5 key={note.id}>
           {note.read ? note.noticeText : <b>{note.noticeText}</b>}
         </h5>
         <p key={`time-${note.id}`}>{getDate(note.date)}</p>
-      </>
+      </div>
     );
   };
 
@@ -51,7 +47,6 @@ const Notifications = ({ notices, countOfNotices }) => {
           {notices.length ? (
             <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
               {notices.length}
-              <span className="visually-hidden">unread messages</span>
             </span>
           ) : null}
         </Button>
@@ -61,56 +56,3 @@ const Notifications = ({ notices, countOfNotices }) => {
 };
 
 export default Notifications;
-
-// const Example = () => (
-//   <OverlayTrigger trigger="click" placement="bottom" overlay={popover}>
-//     <Button className="position-relative" variant="success">
-//       Notice
-//       <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-//         {notices.length}
-//         <span className="visually-hidden">unread messages</span>
-//       </span>
-//     </Button>
-//   </OverlayTrigger>
-// );
-
-/* <button
-        id="noticeBtn"
-        type="button"
-        className="btn btn-primary position-relative "
-        data-toggle="popover"
-        data-placement="bottom"
-        title="Popover title"
-        data-content="And here's some amazing content. It's very engaging. Right?"
-      >
-        Notificate
-        <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-          {notices.length}
-          <span className="visually-hidden">unread messages</span>
-        </span>
-      </button> */
-
-/* 
-      {["bottom"].map((placement) => (
-        <OverlayTrigger
-          trigger="click"
-          key={placement}
-          placement={"bottom"}
-          overlay={
-            <Popover id={`popover-positioned-${placement}`}>
-              <Popover.Header as="h3">{`Notices`}</Popover.Header>
-              <Popover.Body>
-                <strong>Holy guacamole!</strong> Check this info.
-              </Popover.Body>
-            </Popover>
-          }
-        >
-          <Button variant="secondary">
-            <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-              {notices.length}
-              <span className="visually-hidden">unread messages</span>
-            </span>
-            Notice
-          </Button>
-        </OverlayTrigger>
-      ))} */
